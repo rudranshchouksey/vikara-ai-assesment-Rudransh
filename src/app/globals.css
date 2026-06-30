@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a1a;
+  --background: #06060e;
   --foreground: #e2e8f0;
 }
 
@@ -18,9 +18,7 @@ body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
-/* ------------------------------------------------
-   Smooth skeleton pulse for loading / hydration
-   ------------------------------------------------ */
+/* ── Smooth skeleton shimmer ─────────────────── */
 @keyframes shimmer {
   0% {
     background-position: -200% 0;
@@ -33,18 +31,103 @@ body {
 .skeleton {
   background: linear-gradient(
     90deg,
-    rgba(148, 163, 184, 0.06) 25%,
-    rgba(148, 163, 184, 0.12) 50%,
-    rgba(148, 163, 184, 0.06) 75%
+    rgba(148, 163, 184, 0.05) 25%,
+    rgba(148, 163, 184, 0.10) 50%,
+    rgba(148, 163, 184, 0.05) 75%
   );
   background-size: 200% 100%;
   animation: shimmer 1.8s ease-in-out infinite;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
 }
 
-/* ------------------------------------------------
-   Subtle glow ring used on focused interactive items
-   ------------------------------------------------ */
+/* ── Focus ring utility ──────────────────────── */
 .focus-ring {
   @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500/60 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950;
+}
+
+/* ── Glass card base ─────────────────────────── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  border-radius: 0.875rem;
+}
+
+.glass-card-hover {
+  transition: all 0.2s ease;
+}
+
+.glass-card-hover:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.06),
+              0 8px 24px -8px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Fade-slide-in animation for cards ───────── */
+@keyframes fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-slide-up 0.3s ease-out both;
+}
+
+/* ── Modal backdrop ──────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-backdrop {
+  animation: fade-in 0.2s ease-out both;
+}
+
+.animate-modal {
+  animation: scale-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Date input customisation (dark theme) ───── */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.6);
+  cursor: pointer;
+}
+
+/* ── Select option backgrounds (dark) ────────── */
+select option {
+  background: #0f0f1a;
+  color: #e2e8f0;
+}
+
+/* ── Custom scrollbar ────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.15);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.25);
 }
